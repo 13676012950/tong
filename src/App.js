@@ -19,15 +19,6 @@ function getEmptyCells(board) {
   return empty;
 }
 
-function addRandomTile(board) {
-  const empty = getEmptyCells(board);
-  if (empty.length === 0) return board;
-  const [r, c] = empty[randomInt(empty.length)];
-  const newBoard = board.map(row => row.slice());
-  newBoard[r][c] = Math.random() < 0.9 ? 2 : 4;
-  return newBoard;
-}
-
 function addRandomTileWithInfo(board) {
   const empty = getEmptyCells(board);
   if (empty.length === 0) return { board, spawned: null };
@@ -326,7 +317,7 @@ function App() {
     }
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [board, score, bestScore, started, gameStatus, activeGame]);
+  }, [board, score, bestScore, started, gameStatus, activeGame, handleMove, applyCheatNearWin]);
 
   function render2048View() {
     return (
