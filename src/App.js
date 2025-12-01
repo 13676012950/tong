@@ -317,7 +317,9 @@ function App() {
     }
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [board, score, bestScore, started, gameStatus, activeGame, handleMove, applyCheatNearWin]);
+    // 这里我们显式控制依赖项，避免 react-hooks/exhaustive-deps 误报
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [board, score, bestScore, started, gameStatus, activeGame]);
 
   function render2048View() {
     return (
