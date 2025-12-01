@@ -1,0 +1,659 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #faf8ef;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.app {
+  text-align: center;
+  user-select: none;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menu-title {
+  margin-bottom: 8px;
+  color: #776e65;
+  font-size: 36px;
+}
+
+.menu-subtitle {
+  margin-top: 0;
+  margin-bottom: 26px;
+  color: #8f7a66;
+  font-size: 20px;
+}
+
+.menu-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+  align-items: center;
+}
+
+.menu-buttons button {
+  padding: 14px 26px;
+  border-radius: 6px;
+  border: none;
+  background: #8f7a66;
+  color: #f9f6f2;
+  font-size: 20px;
+  cursor: pointer;
+  width: 260px;
+  min-height: 52px;
+  max-width: 100%;
+}
+
+.menu-buttons button:hover {
+  background: #9f8b76;
+}
+
+.menu-note {
+  width: 360px;
+  text-align: left;
+  margin-top: 10px;
+}
+
+.note-label {
+  font-size: 14px;
+  color: #8f7a66;
+  margin-bottom: 4px;
+}
+
+.note-textarea {
+  width: 100%;
+  height: 100px;
+  border-radius: 4px;
+  border: 1px solid #cdc1b4;
+  padding: 6px 8px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.menu-scoreboard {
+  width: 360px;
+  margin-top: 16px;
+  text-align: left;
+  background: #f9f6f2;
+  border-radius: 6px;
+  padding: 10px 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.scoreboard-title {
+  font-size: 16px;
+  color: #776e65;
+  margin-bottom: 8px;
+}
+
+.scoreboard-header {
+  display: flex;
+  font-size: 14px;
+  color: #8f7a66;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #eee0d0;
+  margin-bottom: 4px;
+}
+
+.scoreboard-row {
+  display: flex;
+  font-size: 14px;
+  color: #8f7a66;
+  padding: 2px 0;
+}
+
+.scoreboard-value {
+  font-weight: bold;
+}
+
+.scoreboard-game {
+  flex: 1;
+}
+
+.scoreboard-col,
+.scoreboard-value {
+  width: 90px;
+  text-align: right;
+}
+
+.header {
+  margin-bottom: 20px;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.cheat-btn {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: transparent;
+  position: relative;
+  cursor: pointer;
+}
+
+.cheat-btn::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.cheat-btn:focus-visible {
+  outline: none;
+}
+
+.scores {
+  display: flex;
+  gap: 10px;
+}
+
+.score-box {
+  background: #bbada0;
+  padding: 6px 12px;
+  border-radius: 4px;
+  color: #f9f6f2;
+  min-width: 80px;
+}
+
+.score-box .label {
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.score-box .value {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.controls {
+  margin-top: 10px;
+}
+
+.controls button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background: #8f7a66;
+  color: #f9f6f2;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.controls button:hover {
+  background: #9f8b76;
+}
+
+.controls .secondary {
+  margin-left: 8px;
+  background: transparent;
+  color: #8f7a66;
+  border: 1px solid #8f7a66;
+}
+
+.controls .secondary:hover {
+  background: rgba(143, 122, 102, 0.1);
+}
+
+.board {
+  background: #bbada0;
+  border-radius: 6px;
+  padding: 10px;
+  display: inline-block;
+  box-shadow: 0 0 10px #ccc;
+}
+
+.row {
+  display: flex;
+}
+
+.cell {
+  width: 80px;
+  height: 80px;
+  margin: 6px 6px 0 0;
+  background: #cdc1b4;
+  border-radius: 3px;
+  font-size: 45px;
+  font-weight: bold;
+  line-height: 80px;
+  text-align: center;
+  color: #776e65;
+  transition: background-color 0.3s ease-out, transform 0.3s ease-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cell-animating {
+  transform: scale(1.08);
+}
+
+.cell-merged {
+  animation: cell-merge 0.4s ease-out;
+}
+
+@keyframes cell-merge {
+  0% {
+    filter: brightness(1);
+    box-shadow: 0 0 0 0 rgba(237, 197, 63, 0.0);
+  }
+  50% {
+    filter: brightness(1.2);
+    box-shadow: 0 0 0 8px rgba(237, 197, 63, 0.4);
+  }
+  100% {
+    filter: brightness(1.05);
+    box-shadow: 0 0 0 4px rgba(237, 197, 63, 0.25);
+  }
+}
+
+.cell-slide-left {
+  transform: translateX(-6px) scale(1.01);
+}
+
+.cell-slide-right {
+  transform: translateX(6px) scale(1.01);
+}
+
+.cell-slide-up {
+  transform: translateY(-6px) scale(1.01);
+}
+
+.cell-slide-down {
+  transform: translateY(6px) scale(1.01);
+}
+
+.cell-new {
+  box-shadow: 0 0 0 3px rgba(237, 197, 63, 0.7);
+}
+
+.cell.value-0 {
+  background: #cdc1b4;
+}
+
+.cell.value-2 {
+  background: #eee4da;
+  color: #776e65;
+}
+
+.cell.value-4 {
+  background: #ede0c8;
+  color: #776e65;
+}
+
+.cell.value-8 {
+  background: #f2b179;
+  color: #f9f6f2;
+}
+
+.cell.value-16 {
+  background: #f59563;
+  color: #f9f6f2;
+}
+
+.cell.value-32 {
+  background: #f67c5f;
+  color: #f9f6f2;
+}
+
+.cell.value-64 {
+  background: #f65e3b;
+  color: #f9f6f2;
+}
+
+.cell.value-128 {
+  background: #edcf72;
+  color: #f9f6f2;
+  font-size: 35px;
+}
+
+.cell.value-256 {
+  background: #edcc61;
+  color: #f9f6f2;
+  font-size: 35px;
+}
+
+.cell.value-512 {
+  background: #edc850;
+  color: #f9f6f2;
+  font-size: 35px;
+}
+
+.cell.value-1024 {
+  background: #edc53f;
+  color: #f9f6f2;
+  font-size: 25px;
+}
+
+.cell.value-2048 {
+  background: #edc22e;
+  color: #f9f6f2;
+  font-size: 25px;
+}
+
+.start-tip {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #776e65;
+}
+
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.placeholder h2 {
+  margin-bottom: 8px;
+  color: #776e65;
+}
+
+.placeholder p {
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: #8f7a66;
+}
+
+.snake-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.snake-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.snake-header h1 {
+  margin: 0 0 6px;
+  color: #776e65;
+}
+
+.snake-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.snake-score {
+  font-size: 18px;
+  color: #776e65;
+}
+
+.snake-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.snake-buttons button {
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: none;
+  background: #8f7a66;
+  color: #f9f6f2;
+  cursor: pointer;
+}
+
+.snake-buttons .secondary {
+  background: transparent;
+  color: #8f7a66;
+  border: 1px solid #8f7a66;
+}
+
+.snake-board {
+  background: #bbada0;
+  border-radius: 6px;
+  padding: 6px;
+  display: inline-block;
+  box-shadow: 0 0 10px #ccc;
+}
+
+.snake-row {
+  display: flex;
+}
+
+.snake-cell {
+  width: 16px;
+  height: 16px;
+  margin: 1px;
+  background: #cdc1b4;
+  border-radius: 2px;
+}
+
+.snake-cell--body {
+  background: #8f7a66;
+}
+
+.snake-cell--head {
+  background: #f57c00;
+}
+
+.snake-cell--food {
+  background: #edc22e;
+}
+
+.snake-tip {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #776e65;
+}
+
+.snake-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(250, 248, 239, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: overlay-fade-in 0.35s ease-out;
+  z-index: 10;
+}
+
+.snake-overlay-content {
+  background: #f9f6f2;
+  padding: 20px 28px;
+  border-radius: 8px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  border: 2px solid #8f7a66;
+}
+
+.snake-overlay-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.tetris-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tetris-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.tetris-header h1 {
+  margin: 0 0 6px;
+  color: #776e65;
+}
+
+.tetris-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.tetris-score {
+  font-size: 18px;
+  color: #776e65;
+}
+
+.tetris-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.tetris-buttons button {
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: none;
+  background: #8f7a66;
+  color: #f9f6f2;
+  cursor: pointer;
+}
+
+.tetris-buttons .secondary {
+  background: transparent;
+  color: #8f7a66;
+  border: 1px solid #8f7a66;
+}
+
+.tetris-board {
+  background: #bbada0;
+  border-radius: 6px;
+  padding: 6px;
+  display: inline-block;
+  box-shadow: 0 0 10px #ccc;
+}
+
+.tetris-row {
+  display: flex;
+}
+
+.tetris-cell {
+  width: 18px;
+  height: 18px;
+  margin: 1px;
+  border-radius: 2px;
+  background: transparent;
+}
+
+.tetris-tip {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #776e65;
+}
+
+.tetris-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(250, 248, 239, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: overlay-fade-in 0.35s ease-out;
+  z-index: 10;
+}
+
+.tetris-overlay-content {
+  background: #f9f6f2;
+  padding: 20px 28px;
+  border-radius: 8px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  border: 2px solid #8f7a66;
+}
+
+.tetris-overlay-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(250, 248, 239, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: overlay-fade-in 0.35s ease-out;
+  z-index: 10;
+}
+
+.overlay-content {
+  background: #f9f6f2;
+  padding: 24px 32px;
+  border-radius: 8px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+.overlay-content h2 {
+  margin: 0 0 8px;
+  color: #776e65;
+}
+
+.overlay-content p {
+  margin: 0 0 16px;
+  color: #8f7a66;
+}
+
+.overlay-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.overlay-buttons button {
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.overlay-win .overlay-content {
+  border: 2px solid #edc22e;
+}
+
+.overlay-lose .overlay-content {
+  border: 2px solid #8f7a66;
+}
+
+.overlay-buttons .secondary {
+  background: transparent;
+  color: #8f7a66;
+  border: 1px solid #8f7a66;
+}
+
+.overlay-buttons .secondary:hover {
+  background: rgba(143, 122, 102, 0.08);
+}
+
+@keyframes overlay-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
