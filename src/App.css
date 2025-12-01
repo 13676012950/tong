@@ -219,6 +219,41 @@ body {
   box-shadow: 0 0 10px #ccc;
 }
 
+.touch-controls {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.touch-row {
+  display: flex;
+  gap: 10px;
+}
+
+.touch-row button {
+  min-width: 56px;
+  min-height: 44px;
+  border-radius: 6px;
+  border: none;
+  background: #8f7a66;
+  color: #f9f6f2;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.touch-row button:active {
+  background: #9f8b76;
+}
+
+@media (min-width: 801px) {
+  /* 桌面端可以隐藏触摸按钮，只用键盘 */
+  .touch-controls {
+    display: none;
+  }
+}
+
 .row {
   display: flex;
 }
